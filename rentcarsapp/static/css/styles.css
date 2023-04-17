@@ -1,3 +1,42 @@
-.nav-item {
-    margin-left: 25px;
+
+#hero-section {
+    height: 90vh;
+    background-image: url("https://images.unsplash.com/photo-1526726538690-5cbf956ae2fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+    background-image: linear-gradient(rgba(126, 125, 125, 0.527),rgba(0, 0, 0, 0.5)) , url(https://images.unsplash.com/photo-1526726538690-5cbf956ae2fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
+    background-size: cover;
+    padding: 100px 0;
+    color: white;
+}
+
+#hero-section a {
+    padding: 20px 40px;
+    margin-top: 30px;
+    background-color: #19A7CE;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+.navbar {
+    background-color: transparent;
+}
+
+.site-navbar {
+    background-color: #3C486B;
+}
+
+.nav-link, .navbar-brand {
+    color: white;
+}
+
+.site-footer {
+    background-color: #3C486B;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.content-section {
+    height: 300px;
 }
