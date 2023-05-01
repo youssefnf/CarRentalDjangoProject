@@ -35,9 +35,21 @@
                   <li class="nav-item ms-4">
                     <a class="nav-link" href="#">Contact</a>
                   </li>
+                  {% if request.user.is_authenticated %}
                   <li class="nav-item ms-4">
-                    <a class="btn btn-primary" href="{% url 'client_login' %}">Sign in</a>
+                    <li class="nav-item ms-4">
+                      <a class="nav-link" href="#">Welcome {{ request.user.username }}</a>
+                    </li>
                   </li>
+                  <li class="nav-item ms-4">
+                    <a class="btn btn-primary" href="{% url 'logout' %}">Log out</a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item ms-4">
+                    <a class="btn btn-primary" href="{% url 'login' %}">Sign in</a>
+                  </li>
+                  {% endif %}
+
                 </ul>
               </div>
             </div>
