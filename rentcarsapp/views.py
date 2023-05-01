@@ -13,4 +13,8 @@ def client_login(request):
     else:
         loginForm = LoginForm()
         return render(request, 'login.html', {'form': loginForm})
+    
+
+def carListingView(request):
+    return render(request, 'carListing.html')
 
