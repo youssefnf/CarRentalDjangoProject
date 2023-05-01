@@ -15,3 +15,6 @@ class Voiture(models.Model):
     nb_portes = models.PositiveBigIntegerField(default=0)
     nb_passager = models.PositiveBigIntegerField(default=0)
     carburant = models.CharField(max_length=10, choices=CARBURANT_CHOICES, default='diesel')
+
+    def __str__(self):
+        return f"{self.marque} {self.model}"

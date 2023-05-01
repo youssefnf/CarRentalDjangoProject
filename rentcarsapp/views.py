@@ -15,6 +15,9 @@ def client_login(request):
         loginForm = LoginForm()
         return render(request, 'login.html', {'form': loginForm})
     
+def client_register(request):
+    return render(request, 'register.html')
+    
 
 def carListingView(request):
     all_cars = Voiture.objects.all()
