@@ -1,5 +1,10 @@
 from django.db import models
 
+CARBURANT_CHOICES = (
+    ('essance', 'ESSENCE'),
+    ('diesel', 'DIESEL'),
+)
+
 # Create your models here.
 
 class Voiture(models.Model):
@@ -7,3 +12,6 @@ class Voiture(models.Model):
     marque = models.CharField(max_length=20)
     model = models.CharField(max_length=20)
     prix = models.FloatField()
+    nb_portes = models.PositiveBigIntegerField(default=0)
+    nb_passager = models.PositiveBigIntegerField(default=0)
+    carburant = models.CharField(max_length=10, choices=CARBURANT_CHOICES, default='diesel')

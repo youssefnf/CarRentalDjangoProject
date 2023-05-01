@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .forms import LoginForm
+from .models import *
 
 # Create your views here.
 
@@ -16,5 +17,6 @@ def client_login(request):
     
 
 def carListingView(request):
-    return render(request, 'carListing.html')
+    all_cars = Voiture.objects.all()
+    return render(request, 'carListing.html', {'cars': all_cars})
 

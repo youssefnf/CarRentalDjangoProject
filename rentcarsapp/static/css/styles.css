@@ -35,8 +35,15 @@ h1 {
     color: white;
     padding: 10px 0;
     text-align: center;
+    bottom: 0;
 }
 
 .content-section {
     height: 300px;
 }
+
+.car-listing-section {
+    min-height: 100vh;
+    padding-top: 40px;
+}
+

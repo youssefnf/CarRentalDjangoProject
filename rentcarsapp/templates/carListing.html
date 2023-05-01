@@ -1,40 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
+<div class="container car-listing-section">
   <div class="row">
-    <div class="col col-md-12 col-lg-4">
-      <div class="card" style="width: 18rem">
-        <img
-          src="https://voiture-neuve.tunisienumerique.com/wp-content/uploads/2017/09/CLIO-LIFE-2.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col col-md-12 col-lg-4">
-        <div class="card" style="width: 18rem">
-          <img
-            src="https://voiture-neuve.tunisienumerique.com/wp-content/uploads/2017/09/CLIO-LIFE-2.jpg"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
+    {% for car in cars %}
       <div class="col col-md-12 col-lg-4">
         <div class="card" style="width: 18rem">
           <img
@@ -43,16 +10,33 @@
             alt="..."
           />
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title">{{ car.marque }} - {{ car.model }}</h5>
+            <div class="col col-12">
+              <span class="car-price">{{ car.prix | floatformat }} Dh/Jour<span>
+            </div>
+            <div class="row">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Portes</td>
+                    <td>{{ car.nb_portes}}</td>
+                  </tr>
+                  <tr>
+                    <td>Passagers</td>
+                    <td>{{ car.nb_passager }}</td>
+                  </tr>
+                  <tr>
+                    <td>Carburant</td>
+                    <td>{{ car.carburant }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <a href="#" class="btn btn-primary">Voir Details</a>
           </div>
         </div>
       </div>
+    {% endfor %}
   </div>
 </div>
-  {% endblock content %}
-
+{% endblock content %}
