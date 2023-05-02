@@ -6,3 +6,7 @@ from .models import *
 @admin.register(Voiture)
 class VoitureModelAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Client)
+class ClientModelAdmin(admin.ModelAdmin):
+    pass

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LoginForm, CustomUserCreationFrom
 from django.contrib.auth import authenticate, login, logout
 from .models import *
@@ -6,7 +6,12 @@ from .models import *
 # Create your views here.
 
 def indexView(request):
-    return render(request, 'index.html')
+    try:
+        connected_client = get_object_or_404(Client, user=request.user)
+    except:
+        return render(request, 'index.html')
+    
+    return render(request, 'index.html', {'client': connected_client})
 
 
 def loginView(request):
@@ -34,6 +39,13 @@ def registerView(request):
         if registerForm.is_valid():
             user = registerForm.save(commit=False)
             user.save()
+
+            client = Client()
+            client.user = user
+            client.nom = user.last_name
+            client.prenom = user.first_name
+            client.email = user.email
+            client.save()
             
             user = authenticate(request, username=user.username, password=request.POST['password1'])
             if user is not None:
