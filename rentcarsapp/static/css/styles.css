@@ -47,3 +47,24 @@ h1 {
     padding-top: 40px;
 }
 
+.login-section {
+    min-height: 100vh;
+}
+
+.login-frame {
+    width: 60%;
+    height: 500px;
+    padding: 30px 30px;
+    margin: auto;
+    margin-top: 40px;
+    background-color: #19A7CE;
+}
+
+.login-inner-frame {
+    width: 80%;
+    height: 80%;
+    padding: 40px 40px;
+    margin: auto;
+    margin-top: 40px;
+    background-color: #B0DAFF;
+}

@@ -16,3 +16,6 @@ class Voiture(models.Model):
     nb_passager = models.PositiveBigIntegerField(default=0)
     carburant = models.CharField(max_length=10, choices=CARBURANT_CHOICES, default='diesel')
     image = models.ImageField(null=True, blank=False, upload_to="images/")
+    
+    def __str__(self):
+        return f"{self.marque} {self.model}"
