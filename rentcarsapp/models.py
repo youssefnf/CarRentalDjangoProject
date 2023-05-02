@@ -15,3 +15,4 @@ class Voiture(models.Model):
     nb_portes = models.PositiveBigIntegerField(default=0)
     nb_passager = models.PositiveBigIntegerField(default=0)
     carburant = models.CharField(max_length=10, choices=CARBURANT_CHOICES, default='diesel')
+    image = models.ImageField(null=True, blank=False, upload_to="images/")
