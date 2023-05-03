@@ -32,3 +32,19 @@ class Client(models.Model):
         
     def __str__(self):
         return f"{self.nom} {self.prenom}"
+
+class Reservation(models.Model):
+    voiture = models.ForeignKey(
+    Voiture,
+    on_delete=models.CASCADE,
+    )
+    client = models.ForeignKey(
+    Client,
+    on_delete=models.CASCADE,
+    )
+    dateDebut =  models.DateTimeField()
+    datefin =  models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.voiture} {self.client}"
+
