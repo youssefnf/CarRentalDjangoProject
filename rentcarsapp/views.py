@@ -74,8 +74,9 @@ def carListingFilterView(request):
     return render(request, 'carListing.html', {'cars': all_cars})
 
 
-def reservationListingView(request):
-    all_reservations = Reservation.objects.all()
+def clientReservationListingView(request):
+    client = get_object_or_404(Client, user=request.user)
+    all_reservations = Reservation.objects.filter(client=client)
     return render(request, 'reservationsListing.html', {'reservations': all_reservations})
 
 @login_required(login_url='/login')
