@@ -7,7 +7,7 @@ urlpatterns = [
     path('logout/', logoutView, name='logout'),
     path('register/', registerView, name='register'),
     path('listing/', carListingView, name='listing'),
-    path('listing/', carListingView, name='listing'),
     path('listing/filter/', carListingFilterView, name='listing-filter'),
+    path('listingReservations/', reservationListingView, name='listingReservations'),
 
 ]

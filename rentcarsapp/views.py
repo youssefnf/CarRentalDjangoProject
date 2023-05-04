@@ -60,6 +60,7 @@ def carListingView(request):
     all_cars = Voiture.objects.all()
     return render(request, 'carListing.html', {'cars': all_cars})
 
+
 def carListingFilterView(request):
     all_cars = Voiture.objects.all()
     marque = request.GET.get('marque')
@@ -67,4 +68,10 @@ def carListingFilterView(request):
     all_cars = all_cars.filter(marque=marque)
     all_cars = all_cars.filter(model=model)
     return render(request, 'carListing.html', {'cars': all_cars})
+
+
+def reservationListingView(request):
+    all_reservations = Reservation.objects.all()
+    return render(request, 'reservationsListing.html', {'reservations': all_reservations})
+
 
