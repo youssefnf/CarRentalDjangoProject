@@ -26,6 +26,9 @@ def loginView(request):
             if user is not None:
                 login(request, user)
                 return redirect('index')
+            else:
+                error_login = True
+                return render(request, 'login.html', {'form': loginForm, 'error_login': error_login})
 
     else:
         loginForm = LoginForm()
@@ -113,7 +116,7 @@ def checkCarAvailabilityView(request, carId):
             date_errors = False
             print(allReservations)
             for res in allReservations:
-                if not ( (date_debut < res.dateDebut.date() and date_fin < res.dateDebut.date()) or (date_debut > res.datefin.date() and date_fin > res.datefin.date())):
+                if not ( (date_debut < res.dateDebut.date() and date_fin < res.dateDebut.date()) or (date_debut > res.dateFin.date() and date_fin > res.dateFin.date())):
                     carAvailability = False
                     date_errors = True
                     

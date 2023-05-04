@@ -1,3 +1,7 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+
+}
 
 #hero-section {
     min-height: 90vh;
@@ -54,6 +58,7 @@ h1 {
 .login-frame {
     width: 60%;
     padding: 30px 30px;
+    padding-bottom: 60px;
     margin: auto;
     margin-top: 40px;
     background-color: #19A7CE;
@@ -65,6 +70,25 @@ h1 {
     margin: auto;
     margin-top: 40px;
     background-color: #B0DAFF;
+}
+
+.login-inner-frame h2 {
+    font-size: 40px;
+    color: #394867;
+}
+
+.login-inner-frame label {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.login-inner-frame button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.login-inner-frame input {
+    height: 45px;
 }
 
 .car-card-div {

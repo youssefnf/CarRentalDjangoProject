@@ -6,6 +6,11 @@
         <h2>Login</h2>
         <form method="POST">
           {% csrf_token %} {{ form.as_p }}
+          {% if error_login%}
+          <div class="alert alert-danger" role="alert">
+            Username or password are not correct, please try again!
+          </div>
+          {% endif %}
           <button type="submit" class="btn btn-lg btn-primary">Login</button>
         </form>
         <span>Dont have an account ?</span> <a href="{% url 'register' %}">Sign Up</a>
