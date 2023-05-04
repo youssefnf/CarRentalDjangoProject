@@ -21,6 +21,66 @@
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
+              {% if request.path == '/listing/' or request.path == '/listing/filter/'%}
+              <div class="dropdown mx-5">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Filter
+                </button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <form class="px-4 py-3">
+                    <input class="form-control" type="text" id="search-input" placeholder="Search...">
+                  </form>
+                  <div class="dropdown-searchable-items">
+                    {% for car in cars %}
+                      <a class="dropdown-item" href="{% url 'listing-filter' %}?marque={{ car.marque }}&model={{ car.model }}">
+                        {{ car.marque }} {{ car.model }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                  <div class="dropdown-no-results" style="display: none;">
+                    Not found.
+                  </div>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'listing' %}">Clear Filter</a></li>
+                </div>
+              </div>
+
+              <script>
+                // Get the search input and the dropdown items
+                const searchInput = document.querySelector('#search-input');
+                const dropdownItems = document.querySelectorAll('.dropdown-searchable-items a');
+              
+                // Listen for changes in the search input
+                searchInput.addEventListener('input', () => {
+                  const searchQuery = searchInput.value.toLowerCase();
+              
+                  let numResults = 0;
+              
+                  // Loop through the dropdown items
+                  for (const item of dropdownItems) {
+                    const itemText = item.textContent.toLowerCase();
+                    const isVisible = itemText.includes(searchQuery);
+              
+                    // Show or hide the item based on the search query
+                    if (isVisible) {
+                      item.style.display = 'block';
+                      numResults++;
+                    } else {
+                      item.style.display = 'none';
+                    }
+                  }
+              
+                  // Show or hide the "No results found" message
+                  const noResultsMessage = document.querySelector('.dropdown-no-results');
+                  if (numResults === 0) {
+                    noResultsMessage.style.display = 'block';
+                  } else {
+                    noResultsMessage.style.display = 'none';
+                  }
+                });
+              </script>
+              {% endif %}
+
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                   <li class="nav-item">
