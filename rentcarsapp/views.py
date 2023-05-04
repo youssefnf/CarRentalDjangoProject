@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import LoginForm, CustomUserCreationFrom
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.contrib.auth.decorators import login_required
+from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 
@@ -76,4 +77,25 @@ def reservationListingView(request):
     all_reservations = Reservation.objects.all()
     return render(request, 'reservationsListing.html', {'reservations': all_reservations})
 
+@login_required(login_url='/login')
+def rentCarView(request, carId):
+    selectedCar = get_object_or_404(Voiture, id=carId)
+    form = AddReservationForm()
+    carAvailability = False
+    return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability})
 
+
+def checkCarAvailabilityView(request, carId):
+    if(request.POST):
+        form = AddReservationForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            print(data)
+
+            carAvailability = True
+
+            selectedCar = get_object_or_404(Voiture, id=carId)
+            form = AddReservationForm(request.POST)
+            return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability})
+
+    return redirect('rentCar', carId=carId)

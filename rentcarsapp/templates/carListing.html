@@ -6,7 +6,7 @@
         <div class="card" style="width: 18rem">
           <img
             src="{{ car.image.url }}"
-            class="card-img-top"
+            class="card-img-top car-card-img"
             alt="..."
           />
           <div class="card-body">
@@ -32,7 +32,7 @@
                 </tbody>
               </table>
             </div>
-            <a href="#" class="btn btn-primary">Rent now</a>
+            <a href="{% url 'rentCar' car.id %}" class="btn btn-primary">Rent now</a>
           </div>
         </div>
       </div>

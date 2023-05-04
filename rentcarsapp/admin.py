@@ -10,3 +10,7 @@ class VoitureModelAdmin(admin.ModelAdmin):
 @admin.register(Client)
 class ClientModelAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Reservation)
+class ReservationModelAdmin(admin.ModelAdmin):
+    pass

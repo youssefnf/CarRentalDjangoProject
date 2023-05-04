@@ -70,3 +70,7 @@ h1 {
 .car-card-div {
     margin-bottom: 30px;
 }
+
+.car-card-img {
+    height: 150px;
+}

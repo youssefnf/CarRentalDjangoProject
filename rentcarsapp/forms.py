@@ -25,4 +25,16 @@ class CustomUserCreationFrom(UserCreationForm):
             
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control mn-2'
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class AddReservationForm(forms.Form):
+    date_debut = forms.DateTimeField(widget=DateInput)
+    date_fin = forms.DateTimeField(widget=DateInput)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control mn-2'
         

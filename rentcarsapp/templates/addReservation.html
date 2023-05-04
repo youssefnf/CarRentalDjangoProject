@@ -1,11 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Rent now</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add reservation</button>
-</form>
+<div class="container">
+    <div class='row'>
+        <div class="col col-md-12 col-lg-4 car-card-div">
+            <div class="card" style="width: 18rem">
+              <img
+                src="{{ car.image.url }}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ car.marque }} - {{ car.model }}</h5>
+                <div class="col col-12">
+                  <span class="car-price">{{ car.prix | floatformat }} Dh/Day<span>
+                </div>
+                <div class="row">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Doors</td>
+                        <td>{{ car.nb_portes}}</td>
+                      </tr>
+                      <tr>
+                        <td>Passengers</td>
+                        <td>{{ car.nb_passager }}</td>
+                      </tr>
+                      <tr>
+                        <td>Fuel</td>
+                        <td>{{ car.carburant }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col col-md-12 col-lg-8" >
+            <form method="POST" action="{% url 'checkavailability' car.id %}">
+                {% csrf_token %} {{ form.as_p }}
+                {% if not carAvailability %}
+                <button type="submit" class="btn btn-lg btn-success">Check Availability</button>
+                {% endif %}
+            </form>
+            {% if carAvailability %}
+            <button type="submit" class="btn btn-lg btn-primary">Add Reservation</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}
