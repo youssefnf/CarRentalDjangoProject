@@ -31,9 +31,9 @@
                     <input class="form-control" type="text" id="search-input" placeholder="Search...">
                   </form>
                   <div class="dropdown-searchable-items">
-                    {% for car in cars %}
-                      <a class="dropdown-item" href="{% url 'listing-filter' %}?marque={{ car.marque }}&model={{ car.model }}">
-                        {{ car.marque }} {{ car.model }}
+                    {% for mq in marques %}
+                      <a class="dropdown-item" href="{% url 'listing-filter' %}?marque={{ mq }}">
+                        {{ mq }}
                       </a>
                     {% endfor %}
                   </div>
