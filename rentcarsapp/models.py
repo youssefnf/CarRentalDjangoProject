@@ -37,7 +37,7 @@ class Reservation(models.Model):
     voiture = models.ForeignKey(Voiture, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     dateDebut =  models.DateTimeField()
-    datefin =  models.DateTimeField()
+    dateFin =  models.DateTimeField()
     dateReservation = models.DateField(null=True)
 
     def __str__(self):

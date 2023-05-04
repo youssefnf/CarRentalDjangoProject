@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from .models import *
+from datetime import date
 
 # Create your views here.
 
@@ -79,6 +80,19 @@ def reservationListingView(request):
 
 @login_required(login_url='/login')
 def rentCarView(request, carId):
+    if request.method == 'POST':
+        form = AddReservationForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            date_debut = data["date_debut"].date()
+            date_fin = data["date_fin"].date()
+            selectedCar = get_object_or_404(Voiture, id=carId)
+            client = get_object_or_404(Client, user=request.user)
+            reservation = Reservation(voiture=selectedCar, client=client, dateDebut=date_debut, dateFin=date_fin, dateReservation=date.today())
+            reservation.save()
+            successful_res = True
+            return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'successful_res': successful_res})
+
     selectedCar = get_object_or_404(Voiture, id=carId)
     form = AddReservationForm()
     carAvailability = False
@@ -90,12 +104,23 @@ def checkCarAvailabilityView(request, carId):
         form = AddReservationForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            print(data)
-
-            carAvailability = True
-
+            date_debut = data["date_debut"].date()
+            date_fin = data["date_fin"].date()
             selectedCar = get_object_or_404(Voiture, id=carId)
+            allReservations = Reservation.objects.filter(voiture=selectedCar)
+            carAvailability = True
+            date_errors = False
+            print(allReservations)
+            for res in allReservations:
+                if not ( (date_debut < res.dateDebut.date() and date_fin < res.dateDebut.date()) or (date_debut > res.datefin.date() and date_fin > res.datefin.date())):
+                    carAvailability = False
+                    date_errors = True
+                    
+                    print('error de date')
+                    return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability, 'date_errors': date_errors})
+
+            
             form = AddReservationForm(request.POST)
-            return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability})
+            return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability, 'date_errors': date_errors})
 
     return redirect('rentCar', carId=carId)

@@ -37,14 +37,28 @@
             </div>
         </div>
         <div class="col col-md-12 col-lg-8" >
+            {% if not carAvailability %}
             <form method="POST" action="{% url 'checkavailability' car.id %}">
                 {% csrf_token %} {{ form.as_p }}
-                {% if not carAvailability %}
                 <button type="submit" class="btn btn-lg btn-success">Check Availability</button>
+                {% if date_errors %}
+                <div class="alert alert-danger" role="alert">
+                  The car is not available in this dates!
+                </div>
+                {% endif %}
+                {% if successful_res %}
+                <div class="alert alert-success" role="alert">
+                  Added Reservation Successfull
+                </div>
                 {% endif %}
             </form>
+            {% endif %}
+
             {% if carAvailability %}
-            <button type="submit" class="btn btn-lg btn-primary">Add Reservation</button>
+            <form method="POST" action="{% url 'rentCar' car.id %}">
+                {% csrf_token %} {{ form.as_p }}
+                <button type="submit" class="btn btn-lg btn-primary">Add Reservation</button>
+            </form>
             {% endif %}
         </div>
     </div>
