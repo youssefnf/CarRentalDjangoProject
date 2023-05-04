@@ -74,3 +74,16 @@ h1 {
 .car-card-img {
     height: 150px;
 }
+
+.addreservation-section {
+    min-height: 90vh;
+    padding-top: 30px;
+}
+
+.greeting-msg {
+    font-size: 50px;
+}
+
+.slogan-msg {
+    font-size: 80px;
+}
