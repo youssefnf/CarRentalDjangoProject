@@ -105,6 +105,8 @@ def rentCarView(request, carId):
             successful_res = True
             return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'successful_res': successful_res})
 
+    if request.user.is_staff:
+        return HttpResponseNotFound("Only Clients cant rent cars!")
     selectedCar = get_object_or_404(Voiture, id=carId)
     form = AddReservationForm()
     carAvailability = False
@@ -123,15 +125,20 @@ def checkCarAvailabilityView(request, carId):
             carAvailability = True
             date_errors = False
 
-
+            if date_debut <= date.today() or date_debut > date_fin:
+                print('here')
+                dates_not_correct = True
+                carAvailability = False
+                return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability, 'datesNotCorrect': dates_not_correct})
 
             for res in allReservations:
                 if not ( (date_debut < res.dateDebut.date() and date_fin < res.dateDebut.date()) or (date_debut > res.dateFin.date() and date_fin > res.dateFin.date())):
                     carAvailability = False
                     date_errors = True
+
                     
                     print('error de date')
-                    return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability, 'date_errors': date_errors})
+                    return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability,'carReservations': allReservations , 'date_errors': date_errors})
 
             
             form = AddReservationForm(request.POST)

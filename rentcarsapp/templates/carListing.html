@@ -32,7 +32,9 @@
                 </tbody>
               </table>
             </div>
+            {% if not request.user.is_staff %}
             <a href="{% url 'rentCar' car.id %}" class="btn btn-primary">Rent now</a>
+            {% endif %}
           </div>
         </div>
       </div>
