@@ -183,12 +183,12 @@ def contactUsView(request):
         email = request.POST['email']
         message = request.POST['message']
 
-        send_mail(
-            name + ' have a message',
-            message,
-            email,
-            ['rentcar.django@gmail.com']
-        )
+        # send_mail(
+        #     name + ' have a message',
+        #     message,
+        #     email,
+        #     ['rentcar.django@gmail.com']
+        # )
 
         return render(request, 'contactUs.html', {'name': name, 'form' : form})
     return render(request, 'contactUs.html', {'form': form})

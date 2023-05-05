@@ -1,6 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="container">
+  <div class="contactus-section">
   <h2 class="text-center my-4"><b>CONTACT US</b></h2>
   <div class="header">
     <iframe
@@ -15,7 +16,7 @@
     </iframe>
   </div>
   <div class="row">
-    <div class="col col-md-12 col-lg-4">
+    <div class="col col-sm-12 col-md-12 col-lg-4">
       <div class="card">
         <div class="card-body">
           <h3 class="card-title">RentCars Infos</h3>
@@ -33,7 +34,7 @@
       </div>
     </div>
     {% if name %}
-    <div class="col col-md-12 col-lg-8">
+    <div class="col col-sm-12 col-md-12 col-lg-8">
       <div class="card">
         <div class="card-body">
           <h3 class="card-title">Thanks {{ name }}!</h3>
@@ -49,17 +50,17 @@
       </div>
     </div>
     {% else %}
-    <div class="col col-md-12 col-lg-8">
+    <div class="col col-sm-12 col-md-12 col-lg-8">
       <form method="POST">
-        {% csrf_token %} {{ form.as_p }} {% if request.user.is_authenticated %}
+        {% csrf_token %} {{ form.as_p }}
         <button type="submit" class="btn btn-lg btn-primary my-3">
           Send email
         </button>
-        {% endif %}
       </form>
     </div>
     {% endif %}
   </div>
+</div>
 </div>
 
 {% endblock %}

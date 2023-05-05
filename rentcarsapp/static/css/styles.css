@@ -111,3 +111,8 @@ h1 {
 .slogan-msg {
     font-size: 80px;
 }
+
+.contactus-section {
+    min-height: 90vh;
+    padding-top: 30px;
+}
