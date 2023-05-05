@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+  <h2 class="text-center my-4"><b>CONTACT US</b></h2>
+  <div class="header">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54340.46138540235!2d-8.093549078320338!3d31.65359030000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafec210db584a7%3A0x1cb520ab88165485!2sEMSI%20MARRAKECH!5e0!3m2!1sfr!2sma!4v1683313517123!5m2!1sfr!2sma"
+      width="100%"
+      height="100%"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    >
+    </iframe>
+  </div>
+  <div class="row">
+    <div class="col col-md-12 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">RentCars Infos</h3>
+          <p class="card-text">
+            <br />
+            <b>Address</b><br />
+            5 Lot Bouizgaren, route de safi,<br />
+            Marrakech, Marrakech 40000<br /><br />
+            <b>Phone:</b><br />
+            (+212) 05-524-422222<br /><br />
+            <b>Email:</b><br />
+            rentcars.django@gmail.com
+          </p>
+        </div>
+      </div>
+    </div>
+    {% if name %}
+    <div class="col col-md-12 col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Thanks {{ name }}!</h3>
+          <p class="card-text">
+            <br />
+            We received your email, and we will respond shortly.
+            <br /><br /><br />
+            If there is anything urgent, please do not hesitate to call us at
+            the phone number provided in our information.
+            <br /><br />
+          </p>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col col-md-12 col-lg-8">
+      <form method="POST">
+        {% csrf_token %} {{ form.as_p }} {% if request.user.is_authenticated %}
+        <button type="submit" class="btn btn-lg btn-primary my-3">
+          Send email
+        </button>
+        {% endif %}
+      </form>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

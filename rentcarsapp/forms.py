@@ -38,3 +38,12 @@ class AddReservationForm(forms.Form):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control mn-2'
         
+class ContactUs(forms.Form):
+    name = forms.CharField()
+    email = forms.CharField()
+    message = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 40}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control mn-2'

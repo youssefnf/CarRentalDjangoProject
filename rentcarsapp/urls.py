@@ -14,5 +14,6 @@ urlpatterns = [
     path('manageReservations/', manageReservationsView, name="manageReservations"),
     path('confirmReservation/<int:id>', confirmReservationView, name='confirmReservation'),
     path('deleteReservation/<int:id>', deleteReservationView, name="deleteReservation"),
+    path('contactUs/', contactUsView, name="contactUs"),
 
 ]
