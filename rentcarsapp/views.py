@@ -173,5 +173,11 @@ def confirmReservationView(request, id):
         return redirect('manageReservations')
     else:
         return HttpResponseNotFound("You don't have permission to proceed!")
+    
+
+def contactUsView(request):
+    form = ContactUs()
+    
+    return render(request, 'contactUs.html', {'form': form})
 
 
