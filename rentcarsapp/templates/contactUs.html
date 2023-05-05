@@ -1,6 +1,4 @@
-{% extends "base.html" %} 
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <div class="container">
   <h2 class="text-center my-4"><b>CONTACT US</b></h2>
@@ -34,12 +32,33 @@
         </div>
       </div>
     </div>
+    {% if name %}
+    <div class="col col-md-12 col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Thanks {{ name }}!</h3>
+          <p class="card-text">
+            <br />
+            We received your email, and we will respond shortly.
+            <br /><br /><br />
+            If there is anything urgent, please do not hesitate to call us at
+            the phone number provided in our information.
+            <br /><br />
+          </p>
+        </div>
+      </div>
+    </div>
+    {% else %}
     <div class="col col-md-12 col-lg-8">
       <form method="POST">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit" class="btn btn-lg btn-primary my-3">Send email</button>
+        {% csrf_token %} {{ form.as_p }} {% if request.user.is_authenticated %}
+        <button type="submit" class="btn btn-lg btn-primary my-3">
+          Send email
+        </button>
+        {% endif %}
       </form>
     </div>
+    {% endif %}
   </div>
 </div>
 

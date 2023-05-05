@@ -5,6 +5,7 @@ from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 from datetime import date
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -177,7 +178,19 @@ def confirmReservationView(request, id):
 
 def contactUsView(request):
     form = ContactUs()
-    
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+
+        send_mail(
+            name + ' have a message',
+            message,
+            email,
+            ['rentcar.django@gmail.com']
+        )
+
+        return render(request, 'contactUs.html', {'name': name, 'form' : form})
     return render(request, 'contactUs.html', {'form': form})
 
 
