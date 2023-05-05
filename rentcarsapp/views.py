@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.contrib.auth import authenticate, login, logout
@@ -79,7 +80,7 @@ def carListingFilterView(request):
 
 def clientReservationListingView(request):
     client = get_object_or_404(Client, user=request.user)
-    all_reservations = Reservation.objects.filter(client=client)
+    all_reservations = Reservation.objects.filter(client=client).order_by('-id')
     return render(request, 'reservationsListing.html', {'reservations': all_reservations})
 
 @login_required(login_url='/login')
@@ -114,7 +115,6 @@ def checkCarAvailabilityView(request, carId):
             allReservations = Reservation.objects.filter(voiture=selectedCar)
             carAvailability = True
             date_errors = False
-            print(allReservations)
             for res in allReservations:
                 if not ( (date_debut < res.dateDebut.date() and date_fin < res.dateDebut.date()) or (date_debut > res.dateFin.date() and date_fin > res.dateFin.date())):
                     carAvailability = False
@@ -128,3 +128,33 @@ def checkCarAvailabilityView(request, carId):
             return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'carAvailability': carAvailability, 'date_errors': date_errors})
 
     return redirect('rentCar', carId=carId)
+
+@login_required(login_url='/login')
+def manageReservationsView(request):
+    all_reservations = Reservation.objects.all().order_by('-id')
+    return render(request, 'manageReservations.html', {'reservations': all_reservations})
+
+@login_required(login_url='/login')
+def deleteReservationView(request, id):
+    if request.user.is_staff or request.user.is_active:
+        reservation = get_object_or_404(Reservation, id=id)
+        reservation.delete()
+        if request.user.is_staff:
+            return redirect('manageReservations')
+        else:
+            return redirect('clientListingReservations')
+    else:
+        return HttpResponseNotFound("You don't have permission to proceed!")
+        
+
+@login_required(login_url='/login')
+def confirmReservationView(request, id):
+    if request.user.is_staff:
+        reservation = get_object_or_404(Reservation, id=id)
+        reservation.paye = True
+        reservation.save()
+        return redirect('manageReservations')
+    else:
+        return HttpResponseNotFound("You don't have permission to proceed!")
+
+

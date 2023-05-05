@@ -9,9 +9,9 @@
                     <th>Client</th>
                     <th>Start date</th>
                     <th>End date</th>
-                    <th>Rsv Date</th>
+                    <th>Reservation Date</th>
                     <th>Price</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     {% for reservation in reservations %}
@@ -23,16 +23,14 @@
                             <td>{{ reservation.dateFin.date }}</td>
                             <td>{{ reservation.dateReservation }}</td>
                             <td>{{ reservation.voiture.prix }}</td>
-                            {% if reservation.paye %}
                             <td>
-                                <button class="btn btn-sm btn-success">Paid</button>
-                            </td>
-                            {% else %}
-                            <td>
+                                {% if not reservation.paye %}
+                                <a class="btn btn-sm btn-primary" href="{% url 'confirmReservation' reservation.id %}">Confirm</a>
                                 <a class="btn btn-sm btn-danger" href="{% url 'deleteReservation' reservation.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+                                {% else %}
+                                <button class="btn btn-sm btn-success">Paid</button>
+                                {% endif %}
                             </td>
-                            {% endif %}
-
                         </tr>
                     {% endfor %}
                 </tbody>

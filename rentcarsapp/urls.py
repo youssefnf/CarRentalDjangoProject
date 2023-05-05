@@ -10,6 +10,9 @@ urlpatterns = [
     path('listing/filter/', carListingFilterView, name='listing-filter'),
     path('clientListingReservations/', clientReservationListingView, name='clientListingReservations'),
     path('rentCar/<int:carId>', rentCarView, name='rentCar'),
-    path('checkAvailability/<int:carId>', checkCarAvailabilityView, name='checkavailability')
+    path('checkAvailability/<int:carId>', checkCarAvailabilityView, name='checkavailability'),
+    path('manageReservations/', manageReservationsView, name="manageReservations"),
+    path('confirmReservation/<int:id>', confirmReservationView, name='confirmReservation'),
+    path('deleteReservation/<int:id>', deleteReservationView, name="deleteReservation"),
 
 ]
