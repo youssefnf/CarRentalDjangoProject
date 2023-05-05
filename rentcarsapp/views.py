@@ -93,6 +93,13 @@ def rentCarView(request, carId):
             date_fin = data["date_fin"].date()
             selectedCar = get_object_or_404(Voiture, id=carId)
             client = get_object_or_404(Client, user=request.user)
+
+            pending_reservations = Reservation.objects.all().filter(client=client, paye=False)
+            num_pending_reservations = len(pending_reservations)
+            if num_pending_reservations >= 2 :
+                cant_reserve = True
+                return render(request, 'addReservation.html', {'car': selectedCar, 'form': form, 'cant_reserve': cant_reserve})
+
             reservation = Reservation(voiture=selectedCar, client=client, dateDebut=date_debut, dateFin=date_fin, dateReservation=date.today())
             reservation.save()
             successful_res = True
@@ -115,6 +122,9 @@ def checkCarAvailabilityView(request, carId):
             allReservations = Reservation.objects.filter(voiture=selectedCar)
             carAvailability = True
             date_errors = False
+
+
+
             for res in allReservations:
                 if not ( (date_debut < res.dateDebut.date() and date_fin < res.dateDebut.date()) or (date_debut > res.dateFin.date() and date_fin > res.dateFin.date())):
                     carAvailability = False

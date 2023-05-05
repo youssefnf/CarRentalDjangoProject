@@ -52,6 +52,11 @@
                   Added Reservation Successfull
                 </div>
                 {% endif %}
+                {% if cant_reserve %}
+                <div class="alert alert-danger" role="alert">
+                  You Can't have more than two pending reservations!
+                </div>
+                {% endif %}
             </form>
             {% endif %}
 
