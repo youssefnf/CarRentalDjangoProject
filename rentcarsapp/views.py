@@ -194,3 +194,6 @@ def contactUsView(request):
     return render(request, 'contactUs.html', {'form': form})
 
 
+def aboutView(request):
+
+    return render(request, 'about.html')
