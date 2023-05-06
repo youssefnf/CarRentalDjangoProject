@@ -151,5 +151,8 @@ h1 {
     margin: 20px;
 }
 
-
-
+.car-price{
+    font-size: 18px;
+    font-weight: 600;
+    color: #3C486B;
+}
