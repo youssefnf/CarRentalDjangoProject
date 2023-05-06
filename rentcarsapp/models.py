@@ -16,6 +16,7 @@ class Voiture(models.Model):
     nb_portes = models.PositiveBigIntegerField(default=0)
     nb_passager = models.PositiveBigIntegerField(default=0)
     carburant = models.CharField(max_length=10, choices=CARBURANT_CHOICES, default='diesel')
+    disponible = models.BooleanField(default=True)
     image = models.ImageField(null=True, blank=False, upload_to="images/")
     
     def __str__(self):

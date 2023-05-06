@@ -64,7 +64,7 @@ def registerView(request):
     
 
 def carListingView(request):
-    all_cars = Voiture.objects.all()
+    all_cars = Voiture.objects.filter(disponible=True)
     marques = []
     for car in all_cars:
         marques.append(car.marque)
@@ -73,7 +73,7 @@ def carListingView(request):
 
 
 def carListingFilterView(request):
-    all_cars = Voiture.objects.all()
+    all_cars = Voiture.objects.filter(disponible=True)
     marque = request.GET.get('marque')
     all_cars = all_cars.filter(marque=marque)
     return render(request, 'carListing.html', {'cars': all_cars})
