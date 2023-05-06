@@ -1,41 +1,56 @@
-{% extends "base.html" %}
-{% block content %}
-    <div class="container">
-        <div class="addreservation-section">
-            <table class="table table-hover">
-                <thead class="table-success">
-                    <th>Code</th>
-                    <th>Car</th>
-                    <th>Client</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Reservation Date</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </thead>
-                <tbody>
-                    {% for reservation in reservations %}
-                        <tr>
-                            <td>{{ reservation.id }}</td>
-                            <td>{{ reservation.voiture }}</td>
-                            <td>{{ reservation.client }}</td>
-                            <td>{{ reservation.dateDebut.date }}</td>
-                            <td>{{ reservation.dateFin.date }}</td>
-                            <td>{{ reservation.dateReservation }}</td>
-                            <td>{{ reservation.voiture.prix }}</td>
-                            <td>
-                                {% if not reservation.paye %}
-                                <a class="btn btn-sm btn-primary" href="{% url 'confirmReservation' reservation.id %}" onclick="return confirm('Are you sure you want to confirm?')">Confirm</a>
-                                <a class="btn btn-sm btn-danger" href="{% url 'deleteReservation' reservation.id %}" onclick="return confirm('Are you sure?')">Delete</a>
-                                {% else %}
-                                <button class="btn btn-sm btn-success">Paid</button>
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <div class="addreservation-section">
+    <form class=" search-form d-flex" role="search" action="{% url 'searchReservation' %}">
+      <input class="form-control me-2" type="search" placeholder="Code" aria-label="Search" name="codeRes" >
+      <button type="submit" class="btn btn-lg btn-outline-success">Search</button>
+      <a class="btn btn-lg btn-outline-primary mx-2" href="{% url 'manageReservations' %}">Clear</a>
+    </form>
+
+    <table class="table table-hover">
+      <thead class="table-success">
+        <th>Code</th>
+        <th>Car</th>
+        <th>Client</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Reservation Date</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        {% for reservation in reservations %}
+        <tr>
+          <td>{{ reservation.id }}</td>
+          <td>{{ reservation.voiture }}</td>
+          <td>{{ reservation.client }}</td>
+          <td>{{ reservation.dateDebut.date }}</td>
+          <td>{{ reservation.dateFin.date }}</td>
+          <td>{{ reservation.dateReservation }}</td>
+          <td>{{ reservation.voiture.prix }}</td>
+          <td>
+            {% if not reservation.paye %}
+            <a
+              class="btn btn-sm btn-primary"
+              href="{% url 'confirmReservation' reservation.id %}"
+              onclick="return confirm('Are you sure you want to confirm?')"
+              >Confirm</a
+            >
+            <a
+              class="btn btn-sm btn-danger"
+              href="{% url 'deleteReservation' reservation.id %}"
+              onclick="return confirm('Are you sure?')"
+              >Delete</a
+            >
+            {% else %}
+            <button class="btn btn-sm btn-success">Paid</button>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 {% endblock %}

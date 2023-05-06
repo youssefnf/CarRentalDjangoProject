@@ -16,5 +16,6 @@ urlpatterns = [
     path('deleteReservation/<int:id>', deleteReservationView, name="deleteReservation"),
     path('contactUs/', contactUsView, name="contactUs"),
     path('about/', aboutView, name="about"),
+    path('searchReservation/', searchReservationView, name="searchReservation"),
 
 ]

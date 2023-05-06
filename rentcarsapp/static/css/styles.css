@@ -42,10 +42,6 @@ h1 {
     bottom: 0;
 }
 
-.content-section {
-    height: 300px;
-}
-
 .car-listing-section {
     min-height: 100vh;
     padding-top: 40px;
@@ -125,7 +121,35 @@ h1 {
     font-family: 'Poppins', sans-serif;
 }
 
+.about-content-section {
+    min-height: 90vh;
+    padding-top: 30px;
+}
 
+.search-form{
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.team-img-div {
+    width: 70%;
+    border-radius: 50%;
+}
+
+.team-images-section{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.social {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.social a {
+    margin: 20px;
+}
 
 
 

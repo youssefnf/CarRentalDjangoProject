@@ -197,3 +197,10 @@ def contactUsView(request):
 def aboutView(request):
 
     return render(request, 'about.html')
+
+
+def searchReservationView(request):
+    res_code = request.GET.get('codeRes')
+    reservations = Reservation.objects.filter(id=res_code)
+    print(reservations)
+    return render(request, 'manageReservations.html', {'reservations': reservations})
