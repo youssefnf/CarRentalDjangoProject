@@ -7,8 +7,6 @@ from .models import *
 from datetime import date
 from django.core.mail import send_mail
 
-# Create your views here.
-
 def indexView(request):
     try:
         connected_client = get_object_or_404(Client, user=request.user)
